@@ -4,6 +4,10 @@ plugins {
     id 'me.maxandroid.router'
 }
 
+router {
+    wikiDir getRootDir().absolutePath
+}
+
 android {
     compileSdkVersion 30
 
