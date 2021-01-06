@@ -1,7 +1,0 @@
-[
-  {
-    "url": "router://page-home",
-    "description": "应用主页",
-    "realPath": "me.maxandroid.router.MainActivity"
-  }
-]

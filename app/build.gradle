@@ -1,8 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-    id 'me.maxandroid.router'
     id 'kotlin-kapt'
+    id 'me.maxandroid.router'
 }
 
 router {
@@ -34,12 +34,6 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
-    }
-
-    kapt {
-        arguments {
-            arg("root_project_dir", rootProject.projectDir.absolutePath)
-        }
     }
 }
 
