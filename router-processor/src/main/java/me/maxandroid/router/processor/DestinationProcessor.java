@@ -4,6 +4,9 @@ import com.google.auto.service.AutoService;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.Writer;
 import java.util.Collections;
 import java.util.Set;
@@ -28,7 +31,13 @@ public class DestinationProcessor extends AbstractProcessor {
 
     @Override
     public boolean process(Set<? extends TypeElement> set, RoundEnvironment roundEnvironment) {
+        if (roundEnvironment.processingOver()) {
+            return false;
+        }
+
         System.out.println(TAG + ">>> process start ...");
+
+        String rootDir = processingEnv.getOptions().get("root_project_dir");
 
         Set<? extends Element> allDestinationElements =
                 roundEnvironment.getElementsAnnotatedWith(Destination.class);
@@ -100,6 +109,37 @@ public class DestinationProcessor extends AbstractProcessor {
         } catch (Exception e) {
             throw new RuntimeException("Error while create file", e);
         }
+
+        // 写入JSON到本地文件中
+
+        // 检测父目录是否存在
+        File rootDirFile = new File(rootDir);
+        if (!rootDirFile.exists()) {
+            throw new RuntimeException("root_project_dir not exist!");
+        }
+
+        // 创建 router_mapping 子目录
+        File routerFileDir = new File(rootDirFile, "router_mapping");
+        if (!routerFileDir.exists()) {
+            routerFileDir.mkdir();
+        }
+
+        File mappingFile = new File(routerFileDir,
+                "mapping_" + System.currentTimeMillis() + ".json");
+
+        // 写入json内容
+        try {
+            BufferedWriter out = new BufferedWriter(new FileWriter(mappingFile));
+            String jsonStr = destinationJsonArray.toString();
+            out.write(jsonStr);
+            out.flush();
+            out.close();
+        } catch (Throwable throwable) {
+            throw new RuntimeException("Error while writing json", throwable);
+        }
+
+        System.out.println(TAG + " >>> process finish.");
+
         return false;
     }
 

@@ -35,6 +35,12 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    kapt {
+        arguments {
+            arg("root_project_dir", rootProject.projectDir.absolutePath)
+        }
+    }
 }
 
 dependencies {
