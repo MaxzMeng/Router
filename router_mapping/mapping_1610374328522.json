@@ -1,0 +1,1 @@
+[{"url":"router://page-home","description":"应用主页","realPath":"me.maxandroid.router.MainActivity"},{"url":"router://imooc/profile","description":"个人信息","realPath":"me.maxandroid.router.ProfileActivity"}]

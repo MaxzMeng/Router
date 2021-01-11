@@ -62,7 +62,7 @@ class RouterMappingTransform extends Transform {
                                 jarInput.name,
                                 jarInput.contentTypes,
                                 jarInput.scopes, Format.JAR)
-                collector.collect(jarInput.file)
+                collector.collectFromJarFile(jarInput.file)
                 FileUtils.copyFile(jarInput.file, dest)
             }
         }
