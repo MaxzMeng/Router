@@ -1,2 +1,3 @@
 rootProject.name = "Router"
 include ':app', 'router-annotations', 'router-processor'
+include ':biz-reading'

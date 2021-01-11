@@ -2,11 +2,13 @@ apply plugin: 'groovy'
 
 repositories {
     jcenter()
+    google()
 }
 
 dependencies {
     implementation gradleApi()
     implementation localGroovy()
+    implementation 'com.android.tools.build:gradle:3.5.0'
 }
 
 apply plugin: 'maven'
